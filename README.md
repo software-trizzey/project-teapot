@@ -1,10 +1,26 @@
 # Project Teapot
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Live site: https://project-teapot.hr-418-teapot.workers.dev/
+
+## What is this?
+
+Project Teapot is a light-hearted, interactive resume scanner inspired by the web experience at https://shop.merchant.dev/. I built it out of curiosity after the original creator did not publish a repo, so I reverse engineered the frontend by inspecting page source and network traffic.
+
+Builder notes:
+- The animations are mostly smoke and mirrors: a static background image is swapped with short video clips based on UI state. I hate to spoil the magic but since you're reading this you're likely interested in learning more.
+- Video generation was the hardest part. I tried out RunwayML gave decent results but struggled to follow prompts, which led to the scanner-style animation.
+- After more research I tried Veo 3.1 via the Gemini API and it nailed the clips on the first try.
+- I still needed clean compositing over a static background, and ended up using the first scene of the idle animation video as the image.
 
 ## Getting Started
 
-First, run the development server:
+First install dependencies
+
+```bash
+pnpm install
+```
+
+Then run the development server
 
 ```bash
 pnpm dev
@@ -36,11 +52,3 @@ Notes:
 - Deployment config lives in `wrangler.jsonc`.
 - OpenNext build output is written to `.open-next/` (ignored by git).
 - Static asset caching headers live in `public/_headers`.
-
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
