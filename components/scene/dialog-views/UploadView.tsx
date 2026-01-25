@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers";
 import { MAX_FILE_SIZE_BYTES, getPrettyFileSize } from "@/lib/services/resume-parser";
 
 type UploadViewProps = {

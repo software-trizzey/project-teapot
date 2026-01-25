@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { clamp } from "@/lib/utils";
+import { clamp } from "@/lib/helpers";
 
 import {
   buildReasons,

@@ -4,7 +4,7 @@ import { cva } from "class-variance-authority";
 import { Music } from "lucide-react";
 import type { CSSProperties, ReactNode } from "react";
 
-import { clamp, cn } from "@/lib/utils";
+import { clamp, cn } from "@/lib/helpers";
 
 import { useBackgroundMusic } from "./BackgroundMusicProvider";
 

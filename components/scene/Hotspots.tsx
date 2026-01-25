@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/helpers";
 
 import type { DialogStateId, ScenePhase } from "@/lib";
 

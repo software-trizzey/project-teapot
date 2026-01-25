@@ -9,7 +9,7 @@ import {
   SCORE_BANDS,
   VERSION,
 } from "./constants";
-import { clamp } from "@/lib/utils";
+import { clamp } from "@/lib/helpers";
 import {
   buildReasons,
   countMatches,
