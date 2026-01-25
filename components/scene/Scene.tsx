@@ -1,6 +1,6 @@
 "use client";
 
-import clsx from "clsx";
+import { cn } from "@/lib/helpers";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 
 import {
@@ -165,7 +165,7 @@ function SceneContent() {
       </div>
 
       <div
-        className={clsx(
+        className={cn(
           "relative z-10 w-full transition-all duration-500",
           isMobilePortrait
             ? "fixed inset-0 h-full overflow-hidden"
@@ -173,13 +173,13 @@ function SceneContent() {
         )}
       >
         <div
-          className={clsx(
+          className={cn(
             "relative mx-auto flex items-center justify-center",
             isMobilePortrait ? "h-full w-full" : "aspect-video w-full"
           )}
         >
           <div
-            className={clsx(
+            className={cn(
               "relative aspect-video",
               isMobilePortrait ? "h-full min-w-full" : "w-full"
             )}

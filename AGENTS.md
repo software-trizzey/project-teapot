@@ -67,7 +67,7 @@
 ## Styling Guidelines
 - Use Tailwind utility classes for styling
 - Prefer semantic grouping of classes
-- Use `clsx` for conditional classes
+- Use `cn` for conditional classes
 - Use `tailwind-merge` when combining class strings
 - Avoid inline styles unless necessary
 

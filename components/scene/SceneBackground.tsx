@@ -1,6 +1,6 @@
 "use client";
 
-import clsx from "clsx";
+import { cn } from "@/lib/helpers";
 import Image, { type StaticImageData } from "next/image";
 import { useEffect, useRef } from "react";
 
@@ -41,19 +41,19 @@ export default function SceneBackground({
     void video.play().catch(() => undefined);
   }, [isVideoVisible, videoSrc]);
 
-  const backgroundClasses = clsx(
+  const backgroundClasses = cn(
     "absolute inset-0 h-full w-full object-cover transition-opacity duration-300 bg-black",
     isVideoVisible ? "opacity-0" : "opacity-100"
   );
 
-  const videoClasses = clsx(
+  const videoClasses = cn(
     "absolute inset-0 h-full w-full object-cover transition-opacity duration-300",
     isVideoVisible ? "opacity-100" : "opacity-0 pointer-events-none"
   );
 
   return (
     <div
-      className={clsx(
+      className={cn(
         "relative overflow-hidden transition-all duration-500",
         isFullScreen ? "h-full w-full" : "aspect-video w-full max-w-[1024px]",
         className
