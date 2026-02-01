@@ -4,12 +4,13 @@ Live site: https://project-teapot.hr-418-teapot.workers.dev/
 
 ## What is this?
 
-Project Teapot is a light-hearted, interactive resume scanner inspired by the web experience at https://shop.merchant.dev/. I built it out of curiosity after the original creator did not publish a repo, so I reverse engineered the frontend by inspecting page source and network traffic.
+Project Teapot is a light-hearted, interactive resume scanner inspired by the website https://shop.merchant.dev/.
+I built it out of curiosity after the original creator didn't publish a repo, so I reverse engineered the frontend by inspecting page sources and network traffic.
 
 Builder notes:
 - The animations are mostly smoke and mirrors: a static background image is swapped with short video clips based on UI state. I hate to spoil the magic but since you're reading this you're likely interested in learning more.
-- Video generation was the hardest part. I tried out RunwayML gave decent results but struggled to follow prompts, which led to the scanner-style animation.
-- After more research I tried Veo 3.1 via the Gemini API and it nailed the clips on the first try.
+- Video generation was the hardest part. I tried out RunwayML which outpur decent results but struggled to follow prompts. The good news is that this intial attempt still led to the scanner-style animation.
+- After researching other video gen. options I tried Veo 3.1 via the Gemini API and it nailed the clips on the first attempt.
 - I still needed clean compositing over a static background, and ended up using the first scene of the idle animation video as the image.
 
 ## Getting Started
