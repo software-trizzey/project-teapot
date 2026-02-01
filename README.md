@@ -1,5 +1,7 @@
 # Project Teapot
 
+![Resume Droid HR-418 ready to serve](public/scene-bg.png)   
+
 Live site: https://project-teapot.hr-418-teapot.workers.dev/
 
 ## What is this?
