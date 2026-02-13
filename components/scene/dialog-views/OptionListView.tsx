@@ -7,21 +7,21 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/helpers";
 import type { ResumeSourceOption } from "@/components/scene/dialog-data";
 
-type SampleListViewProps = {
+type OptionListViewProps = {
   options: ResumeSourceOption[];
   selectedOptionId: string | null;
   onOptionSelect: (optionId: string) => void;
   hintText?: string;
 };
 
-type SampleListItemProps = {
+type OptionListItemProps = {
   option: ResumeSourceOption;
   index: number;
   isSelected: boolean;
   onClick: (option: ResumeSourceOption) => void;
 };
 
-function SampleListItem({ option, index, isSelected, onClick }: SampleListItemProps) {
+function OptionListItem({ option, index, isSelected, onClick }: OptionListItemProps) {
   const isChaos = option.id === "sample-chaos";
   const isUpload = option.kind === "upload";
   const baseClasses =
@@ -70,12 +70,12 @@ function SampleListItem({ option, index, isSelected, onClick }: SampleListItemPr
   );
 }
 
-export default function SampleListView({
+export default function OptionListView({
   options,
   selectedOptionId,
   onOptionSelect,
   hintText,
-}: SampleListViewProps) {
+}: OptionListViewProps) {
   const handleOptionClick = (option: ResumeSourceOption) => {
     onOptionSelect(option.id);
   };
@@ -84,7 +84,7 @@ export default function SampleListView({
     <div className="space-y-4 scrollbar-hide">
       <div className="grid gap-3 md:grid-cols-3">
         {options.map((option, index) => (
-          <SampleListItem
+          <OptionListItem
             key={option.id}
             index={index}
             option={option}

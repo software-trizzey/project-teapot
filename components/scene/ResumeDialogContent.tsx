@@ -5,7 +5,7 @@ import type { DialogOption, DialogStateConfig } from "@/lib";
 import type { DialogState } from "@/lib/dialogState";
 
 import MenuView from "./dialog-views/MenuView";
-import SampleListView from "./dialog-views/SampleListView";
+import OptionListView from "./dialog-views/OptionListView";
 import UploadView from "./dialog-views/UploadView";
 import WelcomeView from "./dialog-views/WelcomeView";
 import type { ResumeSourceOption } from "./dialog-data";
@@ -51,7 +51,7 @@ export default function ResumeDialogContent({
       )}
 
       {state.id === "sample-list" && (
-        <SampleListView
+        <OptionListView
           options={sourceOptions}
           selectedOptionId={state.selectedSampleId}
           onOptionSelect={onSourceOptionSelect}
