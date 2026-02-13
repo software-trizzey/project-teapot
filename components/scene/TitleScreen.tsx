@@ -37,7 +37,7 @@ export default function TitleScreen({ onContinue }: TitleScreenProps) {
     <button
       type="button"
       onClick={onContinue}
-      className="group relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-slate-950 px-8 text-left text-white sm:px-14 lg:px-20"
+      className="group relative flex min-h-dvh w-full items-center justify-center overflow-hidden bg-slate-950 px-8 text-left text-white sm:px-14 lg:px-20"
       aria-label="Continue to resume review center"
     >
       <div

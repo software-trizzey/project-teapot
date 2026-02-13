@@ -166,7 +166,7 @@ function SceneContent() {
   }, [dialogState.isOpen, handleOpenResumeDialog, sceneState.phase]);
 
   return (
-    <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-black px-0 sm:px-6">
+    <section className="relative flex h-dvh w-full items-center justify-center overflow-hidden bg-black px-0 sm:px-6">
       <div className="starfield" aria-hidden="true">
         <div className="starfield__layer starfield__layer--slow" />
         <div className="starfield__layer starfield__layer--medium" />

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { BackgroundMusicProvider } from "@/components/audio/BackgroundMusicProvider";
@@ -48,6 +48,11 @@ export const metadata: Metadata = {
   other: {
     "apple-mobile-web-app-title": "HR-418",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
