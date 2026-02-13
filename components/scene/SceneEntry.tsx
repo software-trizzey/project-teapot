@@ -2,13 +2,32 @@
 
 import { useCallback, useEffect, useState } from "react";
 
+import { useBackgroundMusic } from "@/components/audio/BackgroundMusicProvider";
 import { cn } from "@/lib/helpers";
 
 import Scene from "./Scene";
 import TitleScreen from "./TitleScreen";
 
-const PRELOAD_IMAGE_ASSETS = ["/scene-bg.png"];
-const PRELOAD_VIDEO_ASSETS = ["/videos/greet.mp4", "/videos/robot-idle.mp4", "/videos/resume-scan.mp4"];
+const PRELOAD_ASSETS = {
+  desktop: {
+    images: ["/scene-bg.png"],
+    videos: [
+      "/videos/greet.mp4",
+      "/videos/robot-idle.mp4",
+      "/videos/resume-scan.mp4",
+      "/videos/error.mp4",
+    ],
+  },
+  "mobile-portrait": {
+    images: ["/scene-bg-mobile.png"],
+    videos: [
+      "/videos/greet-mobile.mp4",
+      "/videos/robot-idle-mobile.mp4",
+      "/videos/resume-scan-mobile.mp4",
+      "/videos/error-mobile.mp4",
+    ],
+  },
+} as const;
 const ENTRY_FADE_MS = 520;
 
 const getViewportProfile = () => {
@@ -36,22 +55,26 @@ const preloadVideo = (src: string) => {
 
 export default function SceneEntry() {
   const [entryState, setEntryState] = useState<"title" | "transition" | "scene">("title");
+  const { enableAudio } = useBackgroundMusic();
 
   useEffect(() => {
-    document.documentElement.dataset.viewportProfile = getViewportProfile();
+    const viewportProfile = getViewportProfile();
+    document.documentElement.dataset.viewportProfile = viewportProfile;
 
-    PRELOAD_IMAGE_ASSETS.forEach(preloadImage);
-    PRELOAD_VIDEO_ASSETS.forEach(preloadVideo);
+    const assets = PRELOAD_ASSETS[viewportProfile];
+    assets.images.forEach(preloadImage);
+    assets.videos.forEach(preloadVideo);
   }, []);
 
   const handleContinue = useCallback(() => {
+    enableAudio();
     setEntryState((currentState) => {
       if (currentState !== "title") {
         return currentState;
       }
       return "transition";
     });
-  }, []);
+  }, [enableAudio]);
 
   useEffect(() => {
     if (entryState !== "transition") {

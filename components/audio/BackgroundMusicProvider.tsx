@@ -18,6 +18,7 @@ export type TrackMetadata = {
 type BackgroundMusicContextValue = {
   isOn: boolean;
   toggleAudio: () => void;
+  enableAudio: () => void;
   track: TrackMetadata;
 };
 
@@ -79,13 +80,35 @@ export function BackgroundMusicProvider({
       });
   }, [isOn]);
 
+  const enableAudio = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio || isOn) {
+      return;
+    }
+
+    const playPromise = audio.play();
+    if (!playPromise) {
+      setIsOn(true);
+      return;
+    }
+
+    void playPromise
+      .then(() => {
+        setIsOn(true);
+      })
+      .catch(() => {
+        setIsOn(false);
+      });
+  }, [isOn]);
+
   const value = useMemo(
     () => ({
       isOn,
       toggleAudio,
+      enableAudio,
       track,
     }),
-    [isOn, toggleAudio, track]
+    [enableAudio, isOn, toggleAudio, track]
   );
 
   return (

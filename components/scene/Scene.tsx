@@ -16,6 +16,7 @@ import {
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import MusicToggle from "@/components/audio/MusicToggle";
 import sceneBg from "@/public/scene-bg.png";
+import sceneBgMobile from "@/public/scene-bg-mobile.png";
 
 import { DialogProvider, useDialogContext } from "./DialogProvider";
 import Hotspots from "./Hotspots";
@@ -23,11 +24,18 @@ import Hud from "./Hud";
 import ResumeDialog from "./ResumeDialog";
 import SceneBackground from "./SceneBackground";
 
-const VIDEO_SOURCES: Record<SceneVideoId, string> = {
+const VIDEO_SOURCES_DESKTOP: Record<SceneVideoId, string> = {
   greet: "/videos/greet.mp4",
   "resume-scan": "/videos/resume-scan.mp4",
   "robot-idle": "/videos/robot-idle.mp4",
   error: "/videos/error.mp4",
+};
+
+const VIDEO_SOURCES_MOBILE: Record<SceneVideoId, string> = {
+  greet: "/videos/greet-mobile.mp4",
+  "resume-scan": "/videos/resume-scan-mobile.mp4",
+  "robot-idle": "/videos/robot-idle-mobile.mp4",
+  error: "/videos/error-mobile.mp4",
 };
 
 export default function Scene() {
@@ -49,6 +57,7 @@ function SceneContent() {
   const [sceneState, setSceneState] = useState<SceneState>(() =>
     controller.getState()
   );
+  const isMobilePortrait = useMediaQuery("(max-width: 640px) and (orientation: portrait)");
 
   useEffect(() => {
     const unsubscribe = controller.subscribe((state) => {
@@ -64,15 +73,14 @@ function SceneContent() {
       }
     };
   }, [controller]);
-
-
   const activeVideoSrc = useMemo(() => {
     if (!sceneState.activeVideo) {
       return null;
     }
 
-    return VIDEO_SOURCES[sceneState.activeVideo];
-  }, [sceneState.activeVideo]);
+    const sourceMap = isMobilePortrait ? VIDEO_SOURCES_MOBILE : VIDEO_SOURCES_DESKTOP;
+    return sourceMap[sceneState.activeVideo];
+  }, [isMobilePortrait, sceneState.activeVideo]);
 
   useEffect(() => {
     if (idleTimeoutRef.current) {
@@ -154,8 +162,6 @@ function SceneContent() {
     };
   }, [dialogState.isOpen, handleOpenResumeDialog, sceneState.phase]);
 
-  const isMobilePortrait = useMediaQuery("(max-width: 640px) and (orientation: portrait)");
-
   return (
     <section className="relative flex h-screen w-full items-center justify-center overflow-hidden bg-black px-0 sm:px-6">
       <div className="starfield" aria-hidden="true">
@@ -185,7 +191,7 @@ function SceneContent() {
             )}
           >
             <SceneBackground
-              backgroundSrc={sceneBg}
+              backgroundSrc={isMobilePortrait ? sceneBgMobile : sceneBg}
               videoSrc={activeVideoSrc}
               isVideoVisible={sceneState.isVideoVisible}
               onVideoEnded={handleVideoEnded}
