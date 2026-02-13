@@ -19,7 +19,7 @@
   ],
   "routes": [
     {
-      "pattern": "teapot.tristandeane.ca/*",
+      "pattern": "teapot.tristandeane.ca",
       "custom_domain": true
     }
   ],
