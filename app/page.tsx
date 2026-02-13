@@ -1,5 +1,5 @@
-import { Scene } from "@/components/scene";
+import { SceneEntry } from "@/components/scene";
 
 export default function Home() {
-  return <Scene />;
+  return <SceneEntry />;
 }

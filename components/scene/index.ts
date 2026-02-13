@@ -1,4 +1,5 @@
 export { default as Scene } from "./Scene"
+export { default as SceneEntry } from "./SceneEntry"
 export { default as SceneBackground } from "./SceneBackground"
 export { default as Hotspots } from "./Hotspots"
 export { default as Hud } from "./Hud"

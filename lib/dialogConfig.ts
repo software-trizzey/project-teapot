@@ -38,7 +38,7 @@ export const DIALOG_STATES: Record<DialogStateId, DialogStateConfig> = {
     id: "welcome",
     speaker: DIALOG_SPEAKER,
     prompt:
-      "Welcome to the Galactic Resume Center. I'm HR-418, designation Teapot. Please activate the scanner to begin your resume review when you're ready...",
+      "Welcome to the Galactic Career Center. I'm HR-418, designation Teapot. Please activate the scanner to begin your resume review when you're ready...",
     options: [],
   },
   menu: {
