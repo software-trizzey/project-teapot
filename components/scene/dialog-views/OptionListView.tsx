@@ -11,6 +11,7 @@ type OptionListViewProps = {
   options: ResumeSourceOption[];
   selectedOptionId: string | null;
   onOptionSelect: (optionId: string) => void;
+  onBack: () => void;
   hintText?: string;
 };
 
@@ -74,6 +75,7 @@ export default function OptionListView({
   options,
   selectedOptionId,
   onOptionSelect,
+  onBack,
   hintText,
 }: OptionListViewProps) {
   const handleOptionClick = (option: ResumeSourceOption) => {
@@ -100,6 +102,9 @@ export default function OptionListView({
           </span>
         </Dialog.Hint>
       )}
+      <Button variant="secondary" onClick={onBack} className="w-full sm:w-auto">
+        Back to menu
+      </Button>
     </div>
   );
 }

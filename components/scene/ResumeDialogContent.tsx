@@ -17,6 +17,7 @@ type ResumeDialogContentProps = {
   openMenuHint: string;
   selectOptionHint: (count: number, suffix?: string) => string;
   onOpenMenu: () => void;
+  onBackToMenu: () => void;
   onSourceOptionSelect: (optionId: string) => void;
   onFileSelect: (file: File | null) => File | null;
   onStartScan: (file?: File | null) => void;
@@ -31,6 +32,7 @@ export default function ResumeDialogContent({
   openMenuHint,
   selectOptionHint,
   onOpenMenu,
+  onBackToMenu,
   onSourceOptionSelect,
   onFileSelect,
   onStartScan,
@@ -55,6 +57,7 @@ export default function ResumeDialogContent({
           options={sourceOptions}
           selectedOptionId={state.selectedSampleId}
           onOptionSelect={onSourceOptionSelect}
+          onBack={onBackToMenu}
           hintText={selectOptionHint(sourceOptions.length)}
         />
       )}
@@ -72,6 +75,7 @@ export default function ResumeDialogContent({
           isUploading={state.isUploading}
           onFileSelect={onFileSelect}
           onStartScan={onStartScan}
+          onBack={onBackToMenu}
           onClearFile={onClearFile}
         />
       )}

@@ -11,6 +11,7 @@ type UploadViewProps = {
   isUploading: boolean;
   onFileSelect: (file: File | null) => File | null;
   onStartScan: (file?: File | null) => void;
+  onBack: () => void;
   onClearFile: () => void;
 };
 
@@ -20,6 +21,7 @@ export default function UploadView({
   isUploading,
   onFileSelect,
   onStartScan,
+  onBack,
   onClearFile,
 }: UploadViewProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -115,6 +117,14 @@ export default function UploadView({
             className="w-full sm:w-auto"
           >
             {isUploading ? "Uploading..." : "Start scan"}
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={onBack}
+            disabled={isUploading}
+            className="w-full sm:w-auto"
+          >
+            Back to menu
           </Button>
         </div>
       </div>

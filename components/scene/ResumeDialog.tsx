@@ -190,6 +190,7 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
         openMenuHint={openMenuHint}
         selectOptionHint={selectOptionHint}
         onOpenMenu={openMenu}
+        onBackToMenu={openMenu}
         onSourceOptionSelect={handleSourceOptionSelect}
         onFileSelect={handleFileSelect}
         onStartScan={handleStartScan}

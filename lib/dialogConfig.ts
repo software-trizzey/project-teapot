@@ -112,7 +112,7 @@ export const DIALOG_STATES: Record<DialogStateId, DialogStateConfig> = {
     speaker: DIALOG_SPEAKER,
     prompt: "Scan complete. Here are the highlights.",
     options: [
-      { id: "scan-again", label: "Scan another resume", nextState: "menu" },
+      { id: "scan-again", label: "Scan another resume", nextState: "sample-list" },
       { id: "close", label: "Close", action: "close" },
     ],
   },

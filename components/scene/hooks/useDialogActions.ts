@@ -149,13 +149,19 @@ export function useDialogActions(state: DialogState, dispatch: Dispatch<DialogEv
       }
 
       if (option.nextState) {
+        if (state.id === "results" && option.id === "scan-again") {
+          clearScanState();
+          dispatch({ type: "SELECT_SAMPLE", sampleId: null });
+          dispatch({ type: "CLOSE_SIDEBAR" });
+        }
+
         if (state.id === "menu" && option.id === "close") {
           dispatch({ type: "SET_RETURNED_TO_WELCOME", value: true });
         }
         setState(option.nextState);
       }
     },
-    [dispatch, handleStartScan, setState, state.id]
+    [clearScanState, dispatch, handleStartScan, setState, state.id]
   );
 
   const handleSidebarOpenChange = useCallback(
