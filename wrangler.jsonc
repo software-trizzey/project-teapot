@@ -17,6 +17,12 @@
       "service": "project-teapot"
     }
   ],
+  "routes": [
+    {
+      "pattern": "teapot.tristandeane.ca/*",
+      "custom_domain": true
+    }
+  ],
   "r2_buckets": [
     // {
     //   "binding": "NEXT_INC_CACHE_R2_BUCKET",
