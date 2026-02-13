@@ -29,6 +29,7 @@ export type DialogState = {
   hasReturnedToWelcome: boolean;
   hasPlayedGreeting: boolean;
   pendingScan: DialogPendingScan | null;
+  hasCompletedScanAnimation: boolean;
 };
 
 export type DialogEvent =
@@ -41,6 +42,7 @@ export type DialogEvent =
   | { type: "SELECT_SAMPLE"; sampleId: string | null }
   | { type: "SET_LAST_SCAN_SOURCE"; source: DialogScanSource | null }
   | { type: "SET_PENDING_SCAN"; scan: DialogPendingScan | null }
+  | { type: "SET_SCAN_ANIMATION_COMPLETED"; value: boolean }
   | { type: "OPEN_SIDEBAR"; mode: "sample" | "results"; sampleId?: string }
   | { type: "CLOSE_SIDEBAR" }
   | { type: "WELCOME_ANIMATED" }
@@ -64,6 +66,7 @@ export const initialDialogState: DialogState = {
   hasReturnedToWelcome: false,
   hasPlayedGreeting: false,
   pendingScan: null,
+  hasCompletedScanAnimation: false,
 };
 
 export const dialogReducer = (state: DialogState, event: DialogEvent): DialogState => {
@@ -112,6 +115,11 @@ export const dialogReducer = (state: DialogState, event: DialogEvent): DialogSta
       return {
         ...state,
         pendingScan: event.scan,
+      };
+    case "SET_SCAN_ANIMATION_COMPLETED":
+      return {
+        ...state,
+        hasCompletedScanAnimation: event.value,
       };
     case "OPEN_SIDEBAR":
       return {

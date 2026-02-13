@@ -29,6 +29,7 @@ export function useDialogActions(state: DialogState, dispatch: Dispatch<DialogEv
     dispatch({ type: "SET_UPLOADING", isUploading: false });
     dispatch({ type: "SET_REVIEW_RESULT", result: null });
     dispatch({ type: "SET_PENDING_SCAN", scan: null });
+    dispatch({ type: "SET_SCAN_ANIMATION_COMPLETED", value: false });
     dispatch({ type: "SET_LAST_SCAN_SOURCE", source: null });
   }, [dispatch]);
 
@@ -90,6 +91,7 @@ export function useDialogActions(state: DialogState, dispatch: Dispatch<DialogEv
 
       dispatch({ type: "SET_LAST_SCAN_SOURCE", source: "upload" });
       dispatch({ type: "SET_UPLOAD_ERROR", error: null });
+      dispatch({ type: "SET_SCAN_ANIMATION_COMPLETED", value: false });
       dispatch({ type: "CLOSE_SIDEBAR" });
       dispatch({ type: "SET_STATE", id: "scanning" });
       dispatch({ type: "SET_PENDING_SCAN", scan: { source: "upload", file: selectedFile } });
@@ -129,6 +131,7 @@ export function useDialogActions(state: DialogState, dispatch: Dispatch<DialogEv
       }
 
       dispatch({ type: "SET_UPLOAD_ERROR", error: null });
+      dispatch({ type: "SET_SCAN_ANIMATION_COMPLETED", value: false });
       dispatch({ type: "CLOSE_SIDEBAR" });
       dispatch({ type: "SET_STATE", id: "scanning" });
       dispatch({ type: "SET_PENDING_SCAN", scan: { source: "sample", sampleId } });

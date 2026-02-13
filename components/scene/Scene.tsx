@@ -115,6 +115,9 @@ function SceneContent() {
   ]);
 
   const handleVideoEnded = () => {
+    if (dialogState.id === "scanning") {
+      dispatch({ type: "SET_SCAN_ANIMATION_COMPLETED", value: true });
+    }
     controller.send({ type: "VIDEO_ENDED" });
   };
 

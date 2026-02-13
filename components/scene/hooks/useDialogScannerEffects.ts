@@ -14,6 +14,11 @@ export function useDialogScannerEffects(state: DialogState, dispatch: Dispatch<D
   const scanTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scanTokenRef = useRef(0);
   const isOpenRef = useRef(state.isOpen);
+  const stateRef = useRef(state);
+
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   useEffect(() => {
     isOpenRef.current = state.isOpen;
@@ -23,6 +28,19 @@ export function useDialogScannerEffects(state: DialogState, dispatch: Dispatch<D
       scanTokenRef.current += 1;
     }
   }, [state.isOpen]);
+
+  useEffect(() => {
+    if (!state.isOpen || state.id !== "scanning") {
+      return;
+    }
+
+    if (!state.reviewResult || !state.hasCompletedScanAnimation) {
+      return;
+    }
+
+    dispatch({ type: "SET_STATE", id: "results" });
+    dispatch({ type: "OPEN_SIDEBAR", mode: "results" });
+  }, [dispatch, state.hasCompletedScanAnimation, state.id, state.isOpen, state.reviewResult]);
 
   useEffect(() => {
     return () => {
@@ -65,8 +83,16 @@ export function useDialogScannerEffects(state: DialogState, dispatch: Dispatch<D
           return;
         }
         dispatch({ type: "SET_REVIEW_RESULT", result });
-        dispatch({ type: "SET_STATE", id: "results" });
-        dispatch({ type: "OPEN_SIDEBAR", mode: "results" });
+
+        const currentState = stateRef.current;
+        if (
+          currentState.isOpen &&
+          currentState.id === "scanning" &&
+          currentState.hasCompletedScanAnimation
+        ) {
+          dispatch({ type: "SET_STATE", id: "results" });
+          dispatch({ type: "OPEN_SIDEBAR", mode: "results" });
+        }
       } catch (error) {
         if (!isOpenRef.current || scanTokenRef.current !== scanToken) {
           return;
