@@ -46,10 +46,9 @@ export const DIALOG_STATES: Record<DialogStateId, DialogStateConfig> = {
     speaker: DIALOG_SPEAKER,
     prompt: "How can I assist you today?",
     options: [
-      { id: "upload", label: "Scan a resume", nextState: "upload-ready" },
       {
-        id: "sample",
-        label: "Try a sample applicant",
+        id: "choose-resume",
+        label: "Scan a resume",
         nextState: "sample-list",
       },
       { id: "what", label: "What is your function?", nextState: "what" },
@@ -99,7 +98,7 @@ export const DIALOG_STATES: Record<DialogStateId, DialogStateConfig> = {
   "sample-list": {
     id: "sample-list",
     speaker: DIALOG_SPEAKER,
-    prompt: "Pick a sample applicant to scan.",
+    prompt: "Choose what to scan. Upload your own resume or pick a sample applicant.",
     options: [{ id: "back", label: "Never mind", nextState: "menu" }],
   },
   scanning: {

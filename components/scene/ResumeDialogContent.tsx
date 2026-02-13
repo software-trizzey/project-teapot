@@ -8,19 +8,18 @@ import MenuView from "./dialog-views/MenuView";
 import SampleListView from "./dialog-views/SampleListView";
 import UploadView from "./dialog-views/UploadView";
 import WelcomeView from "./dialog-views/WelcomeView";
-import type { SampleResume } from "./dialog-data";
+import type { ResumeSourceOption } from "./dialog-data";
 
 type ResumeDialogContentProps = {
   state: DialogState;
   stateConfig: DialogStateConfig;
-  samples: SampleResume[];
+  sourceOptions: ResumeSourceOption[];
   openMenuHint: string;
   selectOptionHint: (count: number, suffix?: string) => string;
   onOpenMenu: () => void;
-  onSampleSelect: (sampleId: string) => void;
+  onSourceOptionSelect: (optionId: string) => void;
   onFileSelect: (file: File | null) => File | null;
   onStartScan: (file?: File | null) => void;
-  onUseSample: () => void;
   onClearFile: () => void;
   onMenuOption: (option: DialogOption) => void;
 };
@@ -28,14 +27,13 @@ type ResumeDialogContentProps = {
 export default function ResumeDialogContent({
   state,
   stateConfig,
-  samples,
+  sourceOptions,
   openMenuHint,
   selectOptionHint,
   onOpenMenu,
-  onSampleSelect,
+  onSourceOptionSelect,
   onFileSelect,
   onStartScan,
-  onUseSample,
   onClearFile,
   onMenuOption,
 }: ResumeDialogContentProps) {
@@ -54,10 +52,10 @@ export default function ResumeDialogContent({
 
       {state.id === "sample-list" && (
         <SampleListView
-          samples={samples}
-          selectedSampleId={state.selectedSampleId}
-          onSampleSelect={onSampleSelect}
-          hintText={selectOptionHint(samples.length)}
+          options={sourceOptions}
+          selectedOptionId={state.selectedSampleId}
+          onOptionSelect={onSourceOptionSelect}
+          hintText={selectOptionHint(sourceOptions.length)}
         />
       )}
 
@@ -74,7 +72,6 @@ export default function ResumeDialogContent({
           isUploading={state.isUploading}
           onFileSelect={onFileSelect}
           onStartScan={onStartScan}
-          onUseSample={onUseSample}
           onClearFile={onClearFile}
         />
       )}

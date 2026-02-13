@@ -21,7 +21,12 @@ import ResumeDialogContent from "./ResumeDialogContent";
 import ResumeDialogFooter from "./ResumeDialogFooter";
 import ResumeDialogHeader from "./ResumeDialogHeader";
 import ResumeDialogSidebar from "./ResumeDialogSidebar";
-import { CHAOS_SAMPLE_ID, CTA_LABELS, SAMPLE_RESUMES } from "./dialog-data";
+import {
+  CHAOS_SAMPLE_ID,
+  CTA_LABELS,
+  RESUME_SOURCE_OPTIONS,
+  SAMPLE_RESUMES,
+} from "./dialog-data";
 
 export type ResumeDialogProps = {
   onPhaseChange: (phase: ScenePhase) => void;
@@ -38,13 +43,13 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
   const {
     handleMenuOption,
     handleSampleSelect,
+    handleUploadResumeSelect,
     handleStartSampleScan,
     handleStartScan,
     handleFileSelect,
     handleClearFile,
     handleSidebarOpenChange,
     openMenu,
-    setState,
   } = useDialogActions(state, dispatch);
 
   const isChaosError = state.id === "error" && state.selectedSampleId === CHAOS_SAMPLE_ID;
@@ -82,6 +87,23 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
     return options;
   }, [state.lastScanSource, state.resumeFile]);
 
+  const handleSourceOptionSelect = useCallback(
+    (optionId: string) => {
+      const option = RESUME_SOURCE_OPTIONS.find((entry) => entry.id === optionId);
+      if (!option) {
+        return;
+      }
+
+      if (option.kind === "upload") {
+        handleUploadResumeSelect();
+        return;
+      }
+
+      handleSampleSelect(option.id);
+    },
+    [handleSampleSelect, handleUploadResumeSelect]
+  );
+
   const handleNumberPress = useCallback(
     (index: number) => {
       if (state.id === "error") {
@@ -93,10 +115,12 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
       }
 
       if (state.id === "sample-list") {
-        const sample = SAMPLE_RESUMES[index];
-        if (sample) {
-          handleSampleSelect(sample.id);
+        const option = RESUME_SOURCE_OPTIONS[index];
+        if (!option) {
+          return;
         }
+
+        handleSourceOptionSelect(option.id);
         return;
       }
 
@@ -105,7 +129,13 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
         handleMenuOption(option);
       }
     },
-    [errorOptions, handleMenuOption, handleSampleSelect, state.id, stateConfig.options]
+    [
+      errorOptions,
+      handleMenuOption,
+      handleSourceOptionSelect,
+      state.id,
+      stateConfig.options,
+    ]
   );
 
   const optionsCount = useMemo(() => {
@@ -114,7 +144,7 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
     }
 
     if (state.id === "sample-list") {
-      return SAMPLE_RESUMES.length;
+      return RESUME_SOURCE_OPTIONS.length;
     }
 
     if (state.id === "welcome" || state.id === "scanning") {
@@ -156,14 +186,13 @@ export default function ResumeDialog({ onPhaseChange, onPlayVideo }: ResumeDialo
       <ResumeDialogContent
         state={state}
         stateConfig={stateConfig}
-        samples={SAMPLE_RESUMES}
+        sourceOptions={RESUME_SOURCE_OPTIONS}
         openMenuHint={openMenuHint}
         selectOptionHint={selectOptionHint}
         onOpenMenu={openMenu}
-        onSampleSelect={handleSampleSelect}
+        onSourceOptionSelect={handleSourceOptionSelect}
         onFileSelect={handleFileSelect}
         onStartScan={handleStartScan}
-        onUseSample={() => setState("sample-list")}
         onClearFile={handleClearFile}
         onMenuOption={handleMenuOption}
       />

@@ -7,6 +7,16 @@ export type SampleResume = {
   iconSrc: string;
 };
 
+export type ResumeSourceOption = {
+  id: string;
+  name: string;
+  summary: string;
+  iconSrc?: string;
+  kind: "upload" | "sample";
+};
+
+export const UPLOAD_RESUME_OPTION_ID = "upload-resume";
+
 export const SAMPLE_RESUMES: SampleResume[] = [
   {
     id: "sample-frontend",
@@ -40,9 +50,20 @@ export const SAMPLE_RESUMES: SampleResume[] = [
   },
 ];
 
+export const RESUME_SOURCE_OPTIONS: ResumeSourceOption[] = [
+  {
+    id: UPLOAD_RESUME_OPTION_ID,
+    name: "Upload My Resume",
+    summary: "Use your own file for a personalized review.",
+    iconSrc: "/assets/icons/upload-resume.svg",
+    kind: "upload",
+  },
+  ...SAMPLE_RESUMES.map((sample) => ({ ...sample, kind: "sample" as const })),
+];
+
 export const CTA_LABELS: Partial<Record<DialogStateId, string>> = {
   "upload-ready": "Upload ready",
-  "sample-list": "Choose a sample",
+  "sample-list": "Choose a resume",
 };
 
 export const CHAOS_SAMPLE_ID = "sample-chaos";

@@ -12,6 +12,7 @@ import { CHAOS_SAMPLE_ERROR, CHAOS_SAMPLE_ID } from "../dialog-data";
 type DialogActions = {
   handleMenuOption: (option: DialogOption) => void;
   handleSampleSelect: (sampleId: string) => void;
+  handleUploadResumeSelect: () => void;
   handleStartSampleScan: (sampleId: string) => void;
   handleStartScan: (file?: File | null) => void;
   handleFileSelect: (file: File | null) => File | null;
@@ -106,6 +107,13 @@ export function useDialogActions(state: DialogState, dispatch: Dispatch<DialogEv
     [dispatch]
   );
 
+  const handleUploadResumeSelect = useCallback(() => {
+    dispatch({ type: "SELECT_SAMPLE", sampleId: null });
+    dispatch({ type: "SET_UPLOAD_ERROR", error: null });
+    dispatch({ type: "CLOSE_SIDEBAR" });
+    dispatch({ type: "SET_STATE", id: "upload-ready" });
+  }, [dispatch]);
+
   const handleStartSampleScan = useCallback(
     (sampleId: string) => {
       dispatch({ type: "SET_LAST_SCAN_SOURCE", source: "sample" });
@@ -162,6 +170,7 @@ export function useDialogActions(state: DialogState, dispatch: Dispatch<DialogEv
   return {
     handleMenuOption,
     handleSampleSelect,
+    handleUploadResumeSelect,
     handleStartSampleScan,
     handleStartScan,
     handleFileSelect,
