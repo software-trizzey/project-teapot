@@ -2,7 +2,7 @@
 
 ![Resume Droid HR-418 ready to serve](public/scene-bg.png)   
 
-Live site: https://project-teapot.hr-418-teapot.workers.dev/
+Live site: https://teapot.tristandeane.ca/
 
 ## What is this?
 
