@@ -54,7 +54,7 @@ export const DIALOG_STATES: Record<DialogStateId, DialogStateConfig> = {
       { id: "what", label: "What is your function?", nextState: "what" },
       {
         id: "privacy",
-        label: "Privacy / data handling",
+        label: "What's your privacy policy?",
         nextState: "privacy",
       },
       { id: "close", label: "Never mind", nextState: "welcome" },

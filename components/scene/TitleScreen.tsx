@@ -9,7 +9,7 @@ type TitleScreenProps = {
 };
 
 const TITLE_COPY =
-  "After a month of production fires and 16-hour days, that \"cracked team\" promising $100M ARR feels different.\n\nYour gut says you're in the right place...";
+  "You've had a great run at your current gig and achieved all of your initial goals.\n\nAfter some reflection, your gut says you're in the right place...";
 
 export default function TitleScreen({ onContinue }: TitleScreenProps) {
   const [hasFinishedTyping, setHasFinishedTyping] = useState(false);

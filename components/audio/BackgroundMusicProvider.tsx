@@ -32,6 +32,8 @@ export type BackgroundMusicProviderProps = {
   track: TrackMetadata;
 };
 
+const DEFAULT_BACKGROUND_MUSIC_VOLUME = 0.28;
+
 export function BackgroundMusicProvider({
   children,
   src,
@@ -44,6 +46,7 @@ export function BackgroundMusicProvider({
     const element = new Audio(src);
     element.loop = true;
     element.preload = "none";
+    element.volume = DEFAULT_BACKGROUND_MUSIC_VOLUME;
     // Avoid loading the audio until the user opts in.
     audioRef.current = element;
 

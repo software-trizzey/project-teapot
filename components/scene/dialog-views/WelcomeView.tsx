@@ -11,7 +11,12 @@ type WelcomeViewProps = {
 export default function WelcomeView({ onOpenMenu, hintText }: WelcomeViewProps) {
   return (
     <Dialog.Hint className="pointer-events-auto">
-      <Button variant="ghost" size="sm" onClick={onOpenMenu}>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={onOpenMenu}
+        className="text-amber-300 hover:text-amber-200"
+      >
         {hintText}
       </Button>
     </Dialog.Hint>

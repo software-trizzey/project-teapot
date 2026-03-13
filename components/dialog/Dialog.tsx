@@ -96,7 +96,7 @@ function DialogHint({ children, className }: DialogProps) {
   return (
     <div
       className={cn(
-        "absolute bottom-4 right-6 text-xs tracking-[0.3em] text-amber-200/80 pointer-events-none animate-soft-blink",
+        "absolute bottom-4 right-6 text-xs tracking-[0.3em] text-amber-300 pointer-events-none animate-soft-blink",
         className
       )}
     >
