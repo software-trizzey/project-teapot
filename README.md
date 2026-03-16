@@ -1,6 +1,6 @@
 # Project Teapot
 
-![Resume Droid HR-418 ready to serve](public/scene-bg.png)   
+![Resume Droid HR-418 waving hello](public/project-teapot-wave.gif)   
 
 Live site: https://teapot.tristandeane.ca/
 
